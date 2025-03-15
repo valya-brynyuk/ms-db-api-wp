@@ -1,0 +1,25 @@
+0342.162 (1) Opened log file at time: Wed, 12 Mar 2025 07:21:06 +0000 on https://www.nilegal.com
+0342.163 (1) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.25.2 WP: 6.7.2 PHP: 7.4.33 (cli, Linux 8499.wp.34sp.com 4.18.0-513.9.1.el8_9.x86_64 #1 SMP Wed Nov 29 18:55:19 UTC 2023 x86_64) MySQL: 10.3.39-MariaDB-log (max packet size=134217728) WPLANG: en_GB Server:  safe_mode: 0 max_execution_time: 900 memory_limit: -1 (used: 14.1M | 18M) multisite: N openssl: OpenSSL 1.1.1k  FIPS 25 Mar 2021 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0342.164 (1) Free space on disk containing Updraft's temporary directory: 176201.4 MB
+0342.166 (1) Requesting backup semaphore lock (b5ad2524e2c6)
+0342.168 (1) [Debug] Lock option (updraft_lock_b5ad2524e2c6, wp_options) was created in the database
+0342.169 (1) [Info] Lock (updraft_lock_b5ad2524e2c6, wp_options) acquired after initialising the database
+0342.170 (1) Backup run: resumption=1, nonce=b5ad2524e2c6, file_nonce=b5ad2524e2c6 begun at=1741763724 (342s ago), job type=backup, previous check-in=41.11s
+0342.172 (1) Scheduling a resumption (2) after 300 seconds (1741764366) in case this run gets aborted
+0342.196 (1) Checking if we have a zip executable available
+0342.197 (1) Creation of backups of directories: already finished
+0342.198 (1) Saving backup status to database (elements: 8)
+0342.202 (1) Database dump (WordPress DB): Creation was completed already
+0342.203 (1) SQL compatibility mode is: ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0342.204 (1) backup_2025-03-12-0715_NI_legal_b5ad2524e2c6-plugins.zip: plugins: This file has already been successfully processed
+0342.205 (1) backup_2025-03-12-0715_NI_legal_b5ad2524e2c6-themes.zip: themes: This file has already been successfully processed
+0342.205 (1) backup_2025-03-12-0715_NI_legal_b5ad2524e2c6-uploads.zip: uploads: This file has already been successfully processed
+0342.206 (1) backup_2025-03-12-0715_NI_legal_b5ad2524e2c6-others.zip: others: This file has already been successfully processed
+0342.207 (1) backup_2025-03-12-0715_NI_legal_b5ad2524e2c6-db.gz: db: This file has already been successfully processed
+0342.207 (1) Saving backup history. Total backup size: Unknown
+0342.209 (1) Resume backup (b5ad2524e2c6, 1): finish run
+0342.211 (1) There were no more files that needed uploading
+0342.211 (1) [Info] Lock option (updraft_lock_b5ad2524e2c6, wp_options) released
+0342.212 (1) There were no errors in the uploads, so the 'resume' event (2) is being unscheduled
+0342.215 (1) No email will be sent - this backup set was empty.
+0342.216 (1) The backup succeeded and is now complete

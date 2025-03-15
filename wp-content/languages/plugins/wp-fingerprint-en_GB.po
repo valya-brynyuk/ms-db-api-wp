@@ -1,0 +1,73 @@
+# Translation of Plugins - WP Fingerprint - Development (trunk) in English (UK)
+# This file is distributed under the same license as the Plugins - WP Fingerprint - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2020-04-30 16:06:17+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - WP Fingerprint - Development (trunk)\n"
+
+#: inc/class-wpfingerprint-settings.php:79
+msgid "WP Fingerprint is protecting your site last checked "
+msgstr "WP Fingerprint is protecting your site last checked "
+
+#: inc/class-wpfingerprint-settings.php:71
+msgid "You have "
+msgstr "You have "
+
+#: inc/class-wpfingerprint-settings.php:113
+msgid " does not match checksums on %s."
+msgstr " does not match checksums on %s."
+
+#: inc/class-wpfingerprint-settings.php:86
+msgid "Recheck"
+msgstr "Recheck"
+
+#: inc/class-wpfingerprint-settings.php:20
+msgid "Integirty Check"
+msgstr "Integrity Check"
+
+#: inc/class-wpfingerprint-settings-table.php:33
+msgid "Last Checked"
+msgstr "Last Checked"
+
+#: inc/class-wpfingerprint-settings-table.php:32
+msgid "Source"
+msgstr "Source"
+
+#: inc/class-wpfingerprint-settings-table.php:31
+msgid "Status"
+msgstr "Status"
+
+#: inc/class-wpfingerprint-settings-table.php:8
+msgid "Plugins"
+msgstr "Plugins"
+
+#: inc/class-wpfingerprint-settings-table.php:7
+#: inc/class-wpfingerprint-settings-table.php:30
+msgid "Plugin"
+msgstr "Plugin"
+
+#. Author URI of the plugin
+msgid "https://www.34SP.com"
+msgstr "https://www.34SP.com"
+
+#. Author of the plugin
+msgid "34SP.com"
+msgstr "34SP.com"
+
+#. Description of the plugin
+msgid "WP Fingerprint adds an additional layer of security to your WordPress website, working to check your plugins for signs of hack or exploit"
+msgstr "WP Fingerprint adds an additional layer of security to your WordPress website, working to check your plugins for signs of hack or exploit"
+
+#. Plugin Name of the plugin
+msgid "WP Fingerprint"
+msgstr "WP Fingerprint"
+
+#: inc/class-wpfingerprint-settings.php:118
+msgid "Last Check: %s"
+msgstr "Last Check: %s"

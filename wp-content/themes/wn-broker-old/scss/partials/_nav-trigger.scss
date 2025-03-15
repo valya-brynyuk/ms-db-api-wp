@@ -1,0 +1,56 @@
+.nav-trigger {
+	display: none;
+	@media (max-width: $max-small) {
+		display: block;
+		width: 40px;
+		height: 40px;
+		position: relative;
+		float: right;
+	}
+}
+
+
+.nav-trigger__icon {
+	@include v-align-center;
+	position: absolute;
+	display: inline-block;
+	width: 100%;
+	height: 3px;
+	background-color: black;
+	
+	/* upper and lower lines in the menu icon */
+	&::before, &:after {
+		content: '';
+		width: 100%;
+		height: 100%; 
+		position: absolute;
+		left: 0;
+		background-color: black;
+		transition: transform .3s, top .3s, background-color 0s;
+	}
+	
+	&::before {
+		top: -5px;
+	}
+
+	&::after {
+		top: 5px;
+	}
+
+	.nav-trigger.is-clicked & {
+		background-color: transparent;
+		&::before, &::after {
+		}
+
+		&::before {
+			top: 0;
+			transform: rotate(135deg);
+		}
+
+		&::after {
+			top: 0;
+			transform: rotate(225deg);
+		}
+		
+	}
+}

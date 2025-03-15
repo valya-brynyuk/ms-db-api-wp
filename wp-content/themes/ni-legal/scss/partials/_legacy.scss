@@ -1,0 +1,43 @@
+/*------------------------------------------------------------------------*\
+	CENTERING - TABLE
+\*------------------------------------------------------------------------*/
+
+.ta_parent, %ta_parent {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.ta-c, %ta-c {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.ta-b, %tab-b {
+	display: table-cell;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+/*------------------------------------------------------------------------*\
+	FUNCTIONS USEFUL FOR MASONRY / ISOTOPE / PACKERY
+\*------------------------------------------------------------------------*/
+
+@mixin grid-width($numberOfColumns,$gutterVal){
+	width: ((100% - (($numberOfColumns - 1) * $gutterVal )) / $numberOfColumns);
+}
+
+@function grid-segment($numberOfColumns,$gutterVal){
+	@return ((100% - (($numberOfColumns - 1) * $gutterVal )) / $numberOfColumns);
+}
+
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+/*------------------------------------------------------------------------*\
+		IE WBR FIX
+\*------------------------------------------------------------------------*/
+
+wbr:after { content: "\00200B"; }

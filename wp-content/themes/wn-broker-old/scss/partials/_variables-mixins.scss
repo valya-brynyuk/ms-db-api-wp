@@ -1,0 +1,271 @@
+/*------------------------------------------------------------------------*\
+	FONT
+\*------------------------------------------------------------------------*/
+
+/*@font-face {
+	font-family: FONT-NAME;
+	src:url('fonts/FONT-NAME-Medium.eot') format('embedded-opentype'),
+		url('fonts/FONT-NAME-Medium.woff') format('woff'),
+		url('fonts/FONT-NAME-Medium.ttf') format('truetype'),
+		url('fonts/FONT-NAME-Medium.svg#FONTNAMEMedium') format('svg');
+}*/
+
+%font {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+%font-bold {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 600;
+	font-style: normal;
+}
+
+%font-headings {
+	font-family: 'Playfair Display', Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+/*------------------------------------------------------------------------*\
+	COLOURS
+\*------------------------------------------------------------------------*/
+
+$mainGrey: #4A4C4A;
+$white: #ffffff;
+$grey: #e9e9e9;
+// $lightGrey: #CCCBCB;
+$black: #000000;
+$navy: #253f54;
+
+
+/*------------------------------------------------------------------------*\
+	VALUES
+\*------------------------------------------------------------------------*/
+
+$fontSize: 20px;
+$lineHeight: 1.4;
+
+$wrapWidth: 1400px;
+
+$gutter: 20px !global;
+$gutter-narrow: 6px !global;
+$gap: 60px !global;
+
+$tTime: 0.3s; //default transition time
+
+/*------------------------------------------------------------------------*\
+	DEVICES
+\*------------------------------------------------------------------------*/
+
+$iphone5: 320px;
+$min-small: 480px;
+$min-medium: 768px;
+$min-large: 992px;
+$min-xlarge: 1200px;
+
+$max-xsmall: ($min-small - 1) !default;
+$max-small: ($min-medium - 1) !default;
+$max-medium: ($min-large - 1) !default;
+$max-large: ($min-xlarge - 1) !default;
+
+/*------------------------------------------------------------------------*\
+	MEDIA QUERIES
+\*------------------------------------------------------------------------*/
+
+@mixin xsmall {
+	@media ( max-width: #{$max-xsmall} ) {
+		@content;
+	}
+}
+
+@mixin small {
+	@media ( max-width: #{$max-small} ) {
+		@content;
+	}
+}
+
+@mixin medium {
+	@media ( min-width: #{$min-medium} ) {
+		@content;
+	}
+}
+
+@mixin large {
+	@media ( min-width: #{$min-large} ) {
+		@content;
+	}
+}
+
+@mixin xlarge {
+	@media ( min-width: #{$min-xlarge} ) {
+		@content;
+	}
+}
+
+@mixin xxlarge {
+	@media ( min-width: #{$min-xxlarge} ) {
+		@content;
+	}
+}
+
+@mixin small-only {
+	@media ( min-width: #{$min-small} ) and ( max-width: #{$max-small} ) {
+		@content;
+	}
+}
+
+@mixin medium-and-xsmall-only {
+	//often the trouble spots for text fitting, right before stuff collapses form columns, and x-small
+	@media ( min-width: #{$min-medium} ) and ( max-width: #{$max-medium} ), ( max-width: #{$max-xsmall} ) {
+		@content;
+	}
+}
+
+@mixin medium-only {
+	@media ( min-width: #{$min-medium} ) and ( max-width: #{$max-medium} ) {
+		@content;
+	}
+}
+
+@mixin large-only {
+	@media ( min-width: #{$min-large} ) and ( max-width: #{$max-large} ) {
+		@content;
+	}
+}
+
+/*------------------------------------------------------------------------*\
+	GRID COLUMNS
+	- background colour grid item boxes by using div inside them, (eg flex-v-align)
+	- if using "minimum propotion blocks", use 
+	  container -> flex columm -> flex-v-align -> minimum-proportion -> div -> content
+\*------------------------------------------------------------------------*/
+
+// Columns
+$oneOfTwelve: 8.33%;
+$twoOfTwelve: 16.667%;
+$threeOfTwelve: 25%;
+$fourOfTwelve: 33.333%;
+$fiveOfTwelve: 41.667%;
+$sixOfTwelve: 50%;
+$sevenOfTwelve: 58.333%;
+$eightOfTwelve: 66.667%;
+$nineOfTwelve: 75%;
+$tenOfTwelve: 83.333%;
+$elevenOfTwelve: 91.667%;
+$twelveOfTwelve: 100%;
+
+//flex container
+@mixin flex-grid ($gutterVal: 0) {  
+	display: flex;
+	flex-direction: row;
+ 	flex-flow: wrap;
+	flex: 0 1 auto;
+	align-items: stretch;
+	margin-left: -$gutterVal;
+	margin-right: -$gutterVal;
+}
+
+// flex colum
+@mixin flex-column ($span: 50%, $gutterVal: 0, $gutterBelowMultiplier: 0) {
+	flex: 1 1 auto;
+	flex-basis: $span;
+	max-width: $span;
+	padding-right: $gutterVal;
+	padding-left: $gutterVal;
+	padding-bottom: $gutterVal*$gutterBelowMultiplier;
+}
+
+/*------------------------------------------------------------------------*\
+	MINIMUM PROPORTION TILES	
+\*------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------*\
+	- eg square, 16x9 etc, fluid, until content is too big to fix, 
+	  in which case row will expand to fit
+	- contain in a flex-v-align in most cases.
+	- use with inner div to contain content
+\*------------------------------------------------------------------------*/
+
+@mixin aspect-ratio ( $proportion: 100% ) {
+	&::before {
+		content: "";
+		width: 1px;
+		margin-left: -1px;
+		float: left;
+		height: 0;
+		padding-bottom: $proportion;
+	}
+	&::after { /* to clear float */
+		content: "";
+		display: table;
+		clear: both;
+	}
+	img {
+		width: 100%;
+	}
+}
+
+@mixin aspect-ratio--with-vertical-centring ( $proportion: 100%, $propAlign: middle ) {
+	// Really only useful for minimum proportion along with vertical alignment of text in boxes. Second arguement probably depricated if using method above instead for everything without vertical alignment
+	font-size: 0;
+	&:after {
+		content: "";
+		display: inline-block;
+		vertical-align: $propAlign;
+		padding-bottom: $proportion;
+	}
+	> div {
+		box-sizing: border-box;
+		display: inline-block; 
+		width: 100%;
+		font-size: 1rem; 
+		vertical-align: $propAlign; 
+	}
+	img {
+		width: 100%;
+	}
+}
+
+/*------------------------------------------------------------------------*\
+	VERTICAL CENTRING (FLEXBOX)
+\*------------------------------------------------------------------------*/
+
+@mixin flex-v-align {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/*------------------------------------------------------------------------*\
+	VERTICAL CENTRING (LEGACY)
+\*------------------------------------------------------------------------*/
+
+@mixin v-align-center($position: absolute) {
+	position: $position;
+	top: 50%;
+	transform: translateY(-50%);
+	backface-visibility: hidden;
+}
+
+@mixin vh-align-center($position: absolute) {
+	position: $position;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	backface-visibility: hidden;
+}
+
+/*------------------------------------------------------------------------*\
+	CLEARFIX
+\*------------------------------------------------------------------------*/
+
+@mixin clearfix() {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}

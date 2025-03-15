@@ -1,0 +1,986 @@
+/*
+Theme Name: The Mortgage Shop
+Author: Sort Design
+Author URI: http://www.sortdesign.co.uk
+*/
+
+/*------------------------------------------------------------------------*\
+	INITIAL IMPORTS
+\*------------------------------------------------------------------------*/
+
+@import "partials/reset";
+@import "partials/variables-mixins";
+@import "partials/modules";
+//@import "vendor/animate";
+//@import "vendor/grids-tiles";
+
+/*------------------------------------------------------------------------*\
+	BEGIN
+\*------------------------------------------------------------------------*/
+
+html, body {
+	
+}
+
+html {
+	font-size: $fontSize;
+	@include medium-only {
+		font-size: $fontSize*0.9;
+	}
+
+	@include small {
+		font-size: $fontSize*1;
+	}
+
+}
+
+body {
+	font-size: 1rem;
+	background-color: $white;
+	color: $mainGrey;
+	@extend %font;
+	line-height: $lineHeight;
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+h1, h2, h3, h4, h5 {
+	@extend %font-bold;
+	margin-bottom: 1rem;
+	color: $accentColour;
+}
+
+h1 {
+	font-size: 1.95rem;
+	color: $white;
+}
+
+h2 {
+	font-size: 1.25rem;
+	
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-bottom: 0;
+}
+
+h4 {
+	font-size: 1rem;
+}
+
+h5 {
+	font-size: 1rem;
+	margin-bottom: 0;
+}
+
+a,
+a:link,
+a:visited {
+	color: $mainGrey;
+	transition: color 0.65s;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: lighten($mainGrey,30%);
+	text-decoration: none;
+}
+
+img {
+	box-sizing: content-box;
+	max-width: 100%;
+	height: auto;
+	border: 0;
+	vertical-align: middle;
+}
+
+button,
+input,
+select,
+textarea {
+	@extend %font;
+}
+
+
+ul {
+	@extend %styled-list;
+}
+
+strong {
+	@extend %font-bold;
+}
+
+input, textarea, select, button {
+	font-size: 1rem;
+}
+
+input, textarea, select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-radius: 2px;
+	border: none;
+	border-bottom: solid 1px $mainGrey;
+}
+
+select {
+	padding: 0.25rem 3rem 0.25rem 0.5rem;
+	background-image: url('icon-down-arrow.svg');
+	background-position: right 0.5rem center;
+	background-repeat: no-repeat;
+	background-size: 21px 10px;
+	background-color: transparent;
+}
+
+input {
+	background-color: transparent;
+	padding: 0.25rem 0.5rem;
+	margin-bottom : 1rem;
+}
+
+textarea {
+	padding: 0.25rem 0.5rem;
+}
+
+input[type="submit"]{
+	background-color: $white;
+	color: $mainGrey;
+	// text-transform: uppercase;
+	@extend %cursor;
+	transition: color $tTime;
+	border-radius: 6px;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	@extend %font-bold;
+	border: solid 3px $accentColour;
+	width: auto;
+	transition: $tTime background-color;
+	&:hover {
+		background-color: $accentColour;
+	}
+}
+
+input[type="number"]{
+	width: 3rem;
+}
+
+input[type="checkbox"] {
+	appearance: checkbox;
+	max-width: none;
+	min-width: 0;
+}
+
+textarea {
+	min-width: 400px;
+	min-height: 100px;
+	margin-bottom: 1rem;
+}
+
+table {
+	margin-bottom: 1rem;
+}
+
+th, td {
+	padding: 15px;
+	@include small {
+		padding: 5px;
+	}
+	vertical-align: middle;
+}
+th:first-child, td:first-child {
+	padding-left: 0;
+}
+
+th {
+	text-align: left;
+	text-transform: uppercase;
+}
+
+::selection {
+	background: rgba(43, 35, 7, 0.13);
+}
+
+::-webkit-input-placeholder {
+	color: $mainGrey;
+}
+::-moz-placeholder { 
+	color: $mainGrey;
+}
+:-ms-input-placeholder { 
+	color: $mainGrey;
+}
+:-moz-placeholder { 
+	color: $mainGrey;
+}
+::placeholder { 
+	color: $mainGrey;
+}
+
+/*------------------------------------------------------------------------*\
+	LAYOUT
+\*------------------------------------------------------------------------*/
+
+@import "partials/cols";
+
+.wrap {
+	margin: 0 auto;
+	max-width: $wrapWidth;
+	position: relative;
+	padding-left: $gutter;
+	padding-right: $gutter;
+}
+
+header#header {
+	padding-top: $gap;
+	padding-bottom: $gap/3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 20;
+	background-color: $white;
+	
+}
+
+section.section {
+	padding-top: $gap;
+	padding-bottom: $gap;
+}
+
+section.section + section.section {
+	padding-top: 0rem;
+}
+
+section.section--accent {
+	padding-top: $gap;
+	padding-bottom: $gap;
+	background-color: $accentColour2;
+}
+
+.section__title {
+	font-size: 1.875rem;
+	color: $accentColour;
+	text-align: center;
+	margin-bottom: $gap;
+}
+
+.content-inner {
+	max-width: 740px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*------------------------------------------------------------------------*\
+	NAV
+\*------------------------------------------------------------------------*/
+
+@import "partials/nav-trigger";
+
+.wrap--header-1 {
+	padding-left: $gutter;
+	padding-right: $gutter;
+	max-width: $wrapWidth;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.wrap--header-2 {
+	padding-left: $gutter;
+	padding-right: $gutter;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $wrapWidth;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: static;
+	body.nav-open & {
+		position: static;
+	}
+}
+
+nav.top-nav {
+	text-align: right;
+	@extend %font-bold;
+	text-transform: uppercase;
+	@include small {
+		display: none;
+		position: absolute;
+		top: 135px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+		background-color: $white;
+		z-index: 10;
+		min-height: 25vh;
+		// box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+		box-shadow: 0 6px 6px -2px rgba(0, 0, 0, 0.25);
+	}
+	@include medium {
+		display: flex;
+	}
+	justify-content: space-between;
+	align-items: center;
+	ul{
+		@extend %unstyled-list;
+	}
+	li {
+		display: inline-block;
+		@include small {
+			display: block;
+			margin-bottom: 1rem;
+		}
+		margin-right: 1rem;
+		&:last-child {
+			margin-right: 0;
+		}
+		&.current_page_item {
+			&::after {
+				margin-top: 0.125rem;
+				// margin-bottom: 0.25rem;
+				content: '';
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 0.35rem;
+				height: 0.35rem;
+				background-color: $accentColour;
+				border-radius: 100%;
+			}
+		}
+	}
+	a{
+		text-decoration: none;
+	}
+}
+
+.header__rhs {
+	flex: 1 1 auto;
+	flex-basis: 66.666%;
+	max-width: 66.666%;
+	text-align: right;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.login-items {
+	font-size: 0.75rem;
+	@extend %font-bold;
+}
+
+
+.login-list {
+	margin-left: 1rem;
+	@extend %unstyled-list;
+	li {
+		display: inline-block;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.profile-link {
+	line-height: 1.4rem;
+	vertical-align: middle;
+	margin-right: 0.25rem;
+
+	&::before {
+		content: '';
+		display: inline-block;
+		vertical-align: sub;
+		width: 1rem;
+		height: 1rem;
+		@extend %bg-contain;
+		background-image: url('images/icon-profile.svg');
+		margin-right: 0.125rem;
+	}
+}
+
+.logout-link {
+	line-height: 1.4rem;
+	vertical-align: middle;
+
+	// margin-right: 0.5rem;
+	&::before {
+		content: '';
+		display: inline-block;
+		vertical-align: sub;
+		width: 1rem;
+		height: 1rem;
+		@extend %bg-contain;
+		background-image: url('images/icon-logout.svg');
+		margin-right: 0.125rem;
+	}
+}
+
+/*------------------------------------------------------------------------*\
+	MODULES
+\*------------------------------------------------------------------------*/
+
+.content {
+	margin-top: 185px;
+}
+
+.banner {
+	padding-bottom: 25%;
+	@include small {
+		padding-bottom: 80%;
+	}
+	background-color: $accentColour;
+	@extend %bg-cover;
+	position: relative;
+	body.home & {
+		padding-bottom: 45%;
+		@include small {
+			padding-bottom: 80%;
+		}
+	}
+	h1,h2,h3,h4,h5 {
+		color: $white;
+		text-align: center;
+	}
+}
+
+.banner__outer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	@include flex-v-align();
+}
+
+.site-logo {
+	display: block;
+	width: 16vw;
+	min-width: 200px;
+	max-width: 280px;
+}
+
+.page-content {
+	padding-top: $gap;
+	padding-bottom: $gap;
+	min-height: 900px;
+	a {
+		@extend %font-bold;
+	}
+}
+
+.login-items {
+	position: absolute;
+	top: 1rem;;
+	right: 1rem;
+}
+
+/*------------------------------------------------------------------------*\
+	PROPERTY PORTAL
+\*------------------------------------------------------------------------*/
+
+a.portal-tile,
+.portal-tile {
+	@extend %cursor;
+	display: block;
+	background-color: $white;
+	color: $mainGrey;
+	// padding: $gutter/2;
+	// padding-top: $gutter;
+	// padding-bottom: $gutter*2;
+	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+	border-radius: 2px;
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-size: 50%;
+	transition: opacity 0.3s;
+	margin-bottom: $gutter;
+	padding-bottom: 75%;
+	.col--1of3 & {
+		padding-bottom: 80%;
+		@include small {
+			padding-bottom: 0;
+		}
+	}
+	@include small {
+		padding-bottom: 0;
+	}
+	position: relative;
+	// @include small {
+	// 	padding: $gutter*1.5;
+	// 	padding-top: $gutter*1.31;
+	// }
+	&:visited,
+	&:link {
+		color: $mainGrey;
+	}
+}
+
+.portal-tile--alt,
+a.portal-tile--alt {
+	box-shadow: none;
+	&::after {
+		position: absolute;
+		content: '';
+		background-color: $mainGrey;
+		@include small {
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 1px;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		@include medium {
+			top: 0;
+			right: -($gutter);
+			height: 100%;
+			width: 1px;
+		}
+	}
+	.col--1of3:nth-child(3n) & {
+		&::after {
+			@include medium {
+				content: none;
+			}
+		}
+	}
+}
+
+.portal-tile__inner {
+	@include small {
+		padding-top: $gutter * 1.5;
+		padding-bottom: $gutter * 2;
+		padding-left: $gutter;
+		padding-right: $gutter;
+	}
+	@include medium {
+		position: absolute;
+		top: $gutter*1.5;
+		left: $gutter;
+		right: $gutter;
+		bottom: $gutter*2;
+	}
+}
+
+.portal-tile__footer {
+	position: absolute;
+	left: $gutter;
+	right: $gutter;
+	bottom: $gutter*2;
+}
+
+.portal-tile__footer {
+	text-align: center;
+}
+
+
+a.portal-tile:hover {
+	// opacity: 0.6;
+}
+
+.portal-tile__title {
+	@extend %font-bold;
+	margin-bottom: 1rem;
+	text-align: center;
+	.col--1of2 & {
+		@include medium {
+			font-size: 1.16rem;
+		}
+	}
+}
+
+.portal-tile__subtitle {
+	min-height: 3.5rem;
+	margin-bottom: 0.25rem;
+}
+
+
+// .portal-tile__overlay {
+// 	position: absolute;
+// 	top: 0;
+// 	left: 0;
+// 	right: 0;
+// 	bottom: 0;
+// 	background-color: $mainGrey;
+// 	z-index: 10;
+// 	opacity: 0;
+// 	transition: opacity $tTime;
+
+// 	.portal-tile:hover & {
+// 		opacity: 0.1;
+// 	}
+// }
+
+
+.portal-tile__icon {
+	@extend %bg-contain;
+	width: 50%;
+	padding-bottom: 40%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.portal-tile__icon--introduce {
+	background-image: url('images/icon-introduce.svg');
+}
+
+.portal-tile__icon--case-tracking {
+	background-image: url('images/icon-house-mag.svg');
+}
+
+.portal-tile__icon--calculator {
+	background-image: url('images/quote-calculator.svg');
+}
+
+
+.portal-tile__icon--email {
+	width: 60%;
+	background-image: url('images/icon-email.svg');
+}
+
+.portal-tile__icon--phone {
+	width: 60%;
+	background-image: url('images/icon-phone.svg');
+}
+
+.portal-tile__icon--mail {
+	width: 60%;
+	background-image: url('images/icon-mail.svg');
+}
+
+
+.portal-tile__icon--access {
+	width: 60%;
+	background-image: url('images/icon-access.svg');
+}
+
+.portal-tile__icon--query {
+	width: 60%;
+	background-image: url('images/icon-query.svg');
+}
+
+.portal-tile__icon--info {
+	width: 60%;
+	background-image: url('images/icon-info.svg');
+}
+
+.portal-tile__icon--services {
+	width: 60%;
+	background-image: url('images/icon-services.svg');
+}
+
+// .portal-tile__inner {
+// 	position: relative;
+// 	z-index: 2;
+// 	@include aspect-ratio(40%);
+
+// 	@include small {
+// 		@include aspect-ratio(40%);
+// 	}
+// }
+
+.portal-bar {
+	position: absolute;
+	top: -$gap/2;
+
+	@include small {
+		top: -$gap/1.5;
+	}
+
+	right: $gutter*2;
+	left: 0;
+	text-align: right;
+
+	ul {
+		@extend %unstyled-list;
+	}
+
+	li {
+		display: inline;
+	}
+}
+
+.quote {
+	text-align: center;
+	max-width: 740px;
+}
+
+.quote__copy {
+	font-size: 1.4rem;
+	line-height: $lineHeight-tight;
+	color: $white;
+	margin-bottom: 0.5rem;
+}
+
+.quote__citation {
+	font-size: 0.84rem;
+	color: $accentColour;
+}
+
+.section__overlap-top {
+	margin-top: -($gap*1.75);
+}
+
+section.section--pre-overlap {
+	padding-bottom: $gap*2;
+}
+
+
+.welcome-message {
+	text-align: center;
+	color: $white;
+	font-size: 1.95rem;
+	line-height: $lineHeight-tight;
+	margin-bottom: 1rem;
+}
+
+.welcome-sub-message {
+	color: $white;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.welcome {
+	@include small {
+		margin-bottom: $gap;
+	}
+}
+
+.login-value--name {
+	color: $accentColour;
+}
+
+/*------------------------------------------------------------------------*\
+	LOGIN FORM
+\*------------------------------------------------------------------------*/
+
+.swpm-login-widget-form {
+	input {
+		background-color: $white;
+	}
+	label {
+		color: $white;
+	}
+	a {
+		color: $white;
+	}
+	.swpm-rember-label {
+		color: $white;
+		font-size: 0.75rem;
+	}
+}
+
+.swpm-username-label {
+	@include medium {
+		display: inline-block;
+	}
+}
+
+.swpm-forgot-pass-link {
+	font-size: 0.75rem;
+}
+
+.swpm-join-us-link {
+	display: none;
+}
+
+.swpm-username-input,
+.swpm-password-input,
+.swpm-login-submit {
+	@include medium {
+		margin-bottom: 0;
+	}
+}
+
+.swpm-username-input input,
+.swpm-password-input input,
+.swpm-login-submit input {
+	@include medium {
+		margin-bottom: 0;
+	}
+}
+
+.swpm-forgot-pass-link {
+	@include medium {
+		display: inline-block;
+		padding-left: 0.5rem;
+	}
+}
+
+.swpm-remember-me {
+	@include medium {
+		display: inline-block;
+	}
+}
+
+.swpm-remember-checkbox {
+	input {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+
+/*------------------------------------------------------------------------*\
+	UTILITY
+\*------------------------------------------------------------------------*/
+
+.text-center {
+	text-align: center;
+}
+
+.large-copy {
+	font-size: 1.95rem;
+	line-height: $lineHeight-tight;
+}
+
+.accent-copy {
+	color: $accentColour;
+}
+
+.highlight-copy {
+	font-size: 1.15rem;
+}
+
+.button-link {
+	background-color: $white;
+	color: $mainGrey;
+	@extend %cursor;
+	transition: color $tTime;
+	border-radius: 6px;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	@extend %font-bold;
+	border: solid 3px $accentColour;
+	width: auto;
+	transition: $tTime background-color;
+
+	&:hover,
+	a:hover & {
+		background-color: $accentColour;
+	}
+
+}
+
+/*------------------------------------------------------------------------*\
+	FOOTER
+\*------------------------------------------------------------------------*/
+
+footer#footer {
+	padding-top: $gap/2;
+	padding-bottom: $gap;
+	// margin-top: $gap;
+	// margin-bottom: $gap;
+	padding-left: $gutter;
+	padding-right: $gutter;
+	text-align: center;
+	background-color: $lightGrey;
+	font-size: 0.74rem;
+}
+
+/*------------------------------------------------------------------------*\
+	PLUGINS, ETC
+\*------------------------------------------------------------------------*/
+
+@import "vendor/lazysizes";
+@import "vendor/slick";
+@import "vendor/slick-theme";
+//@import "vendor/remodal";
+//@import "vendor/remodal-default-theme";
+//@import "vendor/google-maps";
+
+/*------------------------------------------------------------------------*\
+	PLUGIN OVERRIDES
+\*------------------------------------------------------------------------*/
+
+.slick-dots li {
+	text-indent: 0;
+	margin:0;
+}
+
+ul.slick-dots {
+	padding-left: 0;
+    text-indent: 0;
+	margin-left: 0;
+	bottom: -2rem;;
+	.button-carousel & {
+		bottom: -5rem;
+	}
+}
+
+ul.slick-dots li:before {
+    content: normal;
+    text-indent: 0;
+    padding-right: 0;
+}
+
+.slick-dots li button {
+	background-color: #999;
+	.quote-carousel & {
+		background-color: $lightGrey;
+	}
+	border-radius: 100%;
+	height: 8px;
+	width: 8px;
+	padding: 0;
+	margin: 0 auto;
+	@include small {
+		width: 6px;
+		height: 6px;
+	}
+}
+
+.slick-dots li button:before {
+	content: none;
+}
+
+.slick-dots li.slick-active button {
+    opacity: .65;
+    background-color: $accentColour;
+	.quote-carousel & {
+		background-color: $mainGrey;
+	}
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+
+
+//contact form 7
+
+.wpcf7 {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 680px;
+	text-align: center;
+	input, textarea {
+		min-width: 100%;
+	}
+	
+	input[type="submit"] {
+		width: auto;
+		min-width: auto;
+	}
+
+	.wpcf7-spinner {
+		display: block;
+	}
+}

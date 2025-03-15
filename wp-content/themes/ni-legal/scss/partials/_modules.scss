@@ -1,0 +1,98 @@
+/*------------------------------------------------------------------------*\
+	SORT RESET
+\*------------------------------------------------------------------------*/
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+html {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+/*------------------------------------------------------------------------*\
+	LIST RE-WORK
+\*------------------------------------------------------------------------*/
+
+%styled-list {
+	padding-left: 1em;
+	text-indent: -1em;
+	margin-left: 0;
+	li:before {
+		content: "•";
+		text-indent: -1em;
+		padding-right: 0.75em;
+	}
+
+	li {
+		text-indent: -1em;
+	}
+}
+
+%unstyled-list {
+	padding-left: 0;
+	text-indent: 0;
+	list-style: none;
+	margin-bottom: 0;
+	li{
+		text-indent: 0;
+		&::before {
+			content: none;
+		}
+	}
+}
+
+/*------------------------------------------------------------------------*\
+	STANDARD VIDEO EMBED CONTAINER 16x9 (VIMEO ETC)
+\*------------------------------------------------------------------------*/
+
+.embed-container { 
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container embed{
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+}
+
+/*------------------------------------------------------------------------*\
+	BACKGROUNDS
+\*------------------------------------------------------------------------*/
+
+%bg-cover {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+%bg-contain {
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+/*------------------------------------------------------------------------*\
+	CURSOR
+\*------------------------------------------------------------------------*/
+
+%cursor{
+	cursor: pointer;
+	cursor: hand;
+}
+
+/*------------------------------------------------------------------------*\
+	NO WRAP
+\*------------------------------------------------------------------------*/
+
+.no-wr {
+	white-space: nowrap;
+}

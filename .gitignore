@@ -1,0 +1,33 @@
+# WordPress core files (якщо вони не є частиною кастомного проекту)
+
+
+# Конфігураційні файли
+wp-config.php
+
+# Лог-файли та налагодження
+debug.log
+error_log
+
+# Кешовані файли
+wp-content/cache/
+wp-content/backup-db/
+
+# Логи та резервні копії
+*.log
+*.sql
+*.sqlite
+
+# Папка з контентом (залишаємо лише необхідні кастомні файли)
+wp-content/uploads/
+wp-content/upgrade/
+
+# Плагіни та теми (залишаємо тільки кастомні)
+
+
+# IDE файли та системні файли
+*.swp
+*.swo
+*.idea/
+*.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,241 @@
+.cols {
+	@include medium {
+		@include flex-grid($gutter);
+	}
+}
+
+.col--1of2 {
+	@include medium {
+		@include flex-column($sixOfTwelve, $gutter);
+	}
+}
+
+.col--1of3 {
+	@include medium {
+		@include flex-column($fourOfTwelve, $gutter);
+	}
+}
+
+.col--2of3 {
+	@include medium {
+		@include flex-column($eightOfTwelve, $gutter);
+	}
+}
+
+.col--1of4 {
+	@include medium {
+		@include flex-column($threeOfTwelve, $gutter);
+	}
+}
+
+.col--1of12 {
+	@include medium {
+		@include flex-column($oneOfTwelve, $gutter);
+	}
+}
+
+.col--2of12 {
+	@include medium {
+		@include flex-column($twoOfTwelve, $gutter);
+	}
+}
+
+.col--3of12 {
+	@include medium {
+		@include flex-column($threeOfTwelve, $gutter);
+	}
+}
+
+.col--4of12 {
+	@include medium {
+		@include flex-column($fourOfTwelve, $gutter);
+	}
+}
+
+.col--5of12 {
+	@include medium {
+		@include flex-column($fiveOfTwelve, $gutter);
+	}
+}
+
+.col--6of12 {
+	@include medium {
+		@include flex-column($sixOfTwelve, $gutter);
+	}
+}
+
+.col--7of12 {
+	@include medium {
+		@include flex-column($sevenOfTwelve, $gutter);
+	}
+}
+
+.col--8of12 {
+	@include medium {
+		@include flex-column($eightOfTwelve, $gutter);
+	}
+}
+
+.col--9of12 {
+	@include medium {
+		@include flex-column($nineOfTwelve, $gutter);
+	}
+}
+
+.col--10of12 {
+	@include medium {
+		@include flex-column($tenOfTwelve, $gutter);
+	}
+}
+
+.col--11of12 {
+	@include medium {
+		@include flex-column($elevenOfTwelve, $gutter);
+	}
+}
+
+.cols--s {
+	@include flex-grid($gutter);
+}
+
+.col--1of2--s {
+	@include flex-column($sixOfTwelve, $gutter);
+}
+
+.col--1of3--s {
+	@include flex-column($fourOfTwelve, $gutter);
+}
+
+.col--2of3--s {
+	@include flex-column($eightOfTwelve, $gutter);
+}
+
+.col--1of4--s {
+	@include flex-column($threeOfTwelve, $gutter);
+}
+
+.col--1of12--s {
+	@include flex-column($oneOfTwelve, $gutter);
+}
+
+.col--2of12--s {
+	@include flex-column($twoOfTwelve, $gutter);
+}
+
+.col--3of12--s {
+	@include flex-column($threeOfTwelve, $gutter);
+}
+
+.col--4of12--s {
+	@include flex-column($fourOfTwelve, $gutter);
+}
+
+.col--5of12--s {
+	@include flex-column($fiveOfTwelve, $gutter);
+}
+
+.col--6of12--s {
+	@include flex-column($sixOfTwelve, $gutter);
+}
+
+.col--7of12--s {
+	@include flex-column($sevenOfTwelve, $gutter);
+}
+
+.col--8of12--s {
+	@include flex-column($eightOfTwelve, $gutter);
+}
+
+.col--9of12--s {
+	@include flex-column($nineOfTwelve, $gutter);
+}
+
+.col--10of12--s {
+	@include flex-column($tenOfTwelve, $gutter);
+}
+
+.col--11of12--s {
+	@include flex-column($elevenOfTwelve, $gutter);
+}
+
+
+.cols--zg {
+	@include medium {
+		@include flex-grid();
+	}
+}
+
+.col--1of2--zg {
+	@include medium {
+		@include flex-column($sixOfTwelve);
+	}
+}
+
+.col--1of3--zg {
+	@include medium {
+		@include flex-column($fourOfTwelve);
+	}
+}
+
+
+// .cols--ng {
+// 	@include medium {
+// 		@include flex-grid($gutter-narrow);
+// 	}
+// }
+
+// .col--1of2--ng {
+// 	@include medium {
+// 		@include flex-column($sixOfTwelve, $gutter-narrow);
+// 	}
+// }
+
+// .col--1of3--ng {
+// 	@include medium {
+// 		@include flex-column($fourOfTwelve, $gutter-narrow);
+// 	}
+// }
+// .cols--login-form {
+// 	@include medium {
+// 		@include flex-grid($gutter);
+// 	}
+// }
+
+.cols--login-form {
+	@include medium {
+		flex: 1 1 auto;
+		padding-right: $gutter/3;
+		padding-left: $gutter/3;
+		@include flex-v-align();
+	}
+}
+
+.col--login-form {
+	@include medium {
+		flex: 1 1 auto;
+		padding-right: $gutter/3;
+		padding-left: $gutter/3;
+	}
+}
+
+
+
+
+
+.col--header-aside {
+	@include small {
+		@include flex-column($sevenOfTwelve, $gutter);
+	}
+	@include medium {
+		@include flex-column($nineOfTwelve, $gutter);
+	}
+}
+
+.col--header-logo {
+	@include small {
+		@include flex-column($fiveOfTwelve, $gutter);
+	}
+	@include medium {
+		@include flex-column($threeOfTwelve, $gutter);
+	}
+}

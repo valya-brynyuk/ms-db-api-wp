@@ -1,0 +1,90 @@
+<?php get_header(); ?>
+
+<div class="content">
+
+
+<?php //get_template_part( 'template-partials/modules' ); ?>
+
+<?php get_template_part( 'template-partials/banner' ); ?>
+
+<section class="section">
+
+	<div class="wrap">
+	
+		<div class="text-center">
+
+			<div class="cols">
+
+				<div class="col--1of3">
+
+					<div class="portal-tile portal-tile--alt">
+						<div class="portal-tile__inner">
+							<div class="portal-tile__title">By Email</div>
+							<div class="portal-tile__subtitle">
+								<a href="mailto:info@nilegal.com">info@nilegal.com</a>
+							</div>
+							<div class="portal-tile__icon portal-tile__icon--email"></div>
+						</div>
+					</div>
+
+				</div>
+<!-- 
+				<div class="col--1of3">
+
+					<div class="portal-tile portal-tile--alt ">
+						<div class="portal-tile__inner">
+							<div class="portal-tile__title ">By Telephone</div>
+							<div class="portal-tile__subtitle">T: +44 (0)7714 785 679</div>
+							<div class="portal-tile__icon portal-tile__icon--phone"></div>
+						</div>
+					</div>
+	
+				</div> -->
+
+				<div class="col--1of3">
+	
+					<div class="portal-tile portal-tile--alt ">
+						<div class="portal-tile__inner">
+							<div class="portal-tile__title">By Mail</div>
+							<div class="portal-tile__subtitle">5 Gilnahirk Park, Belfast,<br>BT5 7DX</div>
+							<div class="portal-tile__icon portal-tile__icon--mail"></div>
+						</div>
+					</div>
+		
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</section>
+
+<section class="section">
+	<div class="wrap">
+	
+			<div class="text-center">
+	
+				<?php if ( have_posts() ): while ( have_posts() ): the_post(); ?>
+				<!-- <h1><?php//the_title(); ?></h1> -->
+				<?php the_content(); ?>
+				<?php endwhile; else: ?>
+				<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+				<?php endif; ?>
+	
+			</div>
+
+
+	</div>
+</section>
+
+<section class="section">
+	<div class="wrap">
+		<?php echo do_shortcode('[contact-form-7 id="41" title="Contact form 1"]'); ?>
+	</div>
+</section>
+
+</div>
+
+<?php get_footer(); ?>

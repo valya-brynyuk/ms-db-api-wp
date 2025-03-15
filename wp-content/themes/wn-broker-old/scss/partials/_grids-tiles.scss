@@ -1,0 +1,50 @@
+/*-----------------------------------------------------------------------------------*\
+	CSS GRID... GRID!
+\*-----------------------------------------------------------------------------------*/
+
+.grid-container {
+	display: grid;
+	grid-gap: $margin;
+	margin-bottom: $margin;
+}
+
+.grid-container--3col {
+	grid-template-columns:  repeat(2, 1fr); // 2 col default
+	@include medium {
+		grid-template-columns:  repeat(3, 1fr); //3 col desktop
+	}
+}
+
+/*-----------------------------------------------------------------------------------*\
+	ALTERNATING TILES (ROWSPAN ON LEFT THEN RIGHT,etc) - FIRST USED ON BOUND
+\*-----------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------*\
+	 __  __
+	[__]|  |
+	[__]|__|
+	|  |[__]
+	|__|[__]
+	[__]|  |
+	[__]|__|
+	|  |[__]
+	|__|[__]
+\*-----------------------------------------------------------------------------------*/
+
+
+.grid-container--periodic-double {
+	
+	.grid-item:not(:last-child):nth-of-type(6n+2), .grid-item:not(:last-child):not(:nth-last-child(2)):nth-of-type(6n+4) {
+		//6n + 2 and 6n + 4 - every 6th item starting on 2nd item, every 6th item starting on the 4th item
+		//not()'s added so when item listing number is not divisible by 3, unapplies the column span and row span to stragglers.  6n+ 2 is only affected if it's last, 6n+4 if it's last OR second last.
+		@include medium {
+			grid-column: span 2;  
+			grid-row: span 2;
+		}
+		.listing-image {
+			@include medium {
+				padding-bottom: 0;
+				height: 100%;
+			}
+		}
+	}
+}
