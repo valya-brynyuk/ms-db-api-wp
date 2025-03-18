@@ -95,36 +95,7 @@ Template Name: Instruct A Case (v2)
 					USE TOKEN TO GET MATTERS - USING CURL DUE TO FILE GET CONTENTS ISSUES
 				\*----------------------------------------------------------------------------------*/
 
-				$curl = curl_init();
-
-				curl_setopt_array($curl, array(
-					CURLOPT_URL => 'https://wn.focisportal.co.uk/FocisCoreAPI/api/Matter/GetClientTransactionDetails',
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_ENCODING => '',
-					CURLOPT_MAXREDIRS => 10,
-					CURLOPT_TIMEOUT => 0,
-					CURLOPT_FOLLOWLOCATION => true,
-					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-					CURLOPT_CUSTOMREQUEST => 'GET',
-					// CURLOPT_POSTFIELDS => '"JosephBloggs@TestAccount.co.uk"',
-					// CURLOPT_POSTFIELDS => '"phigginsontestbroker1@wilson-nesbitt.co.uk"',
-					CURLOPT_POSTFIELDS => '"testing104@wilson-nesbitt.co.uk"',
-					// CURLOPT_POSTFIELDS => '"'.$username.'"',
-					// CURLOPT_POSTFIELDS => '"'.$email_value.'"',
-					
-					CURLOPT_HTTPHEADER => array(
-						'Authorization: Bearer ' . $accessToken,
-						'Content-Type: application/json'
-					),
-				));
-
-				// Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quisquam fugiat tempore, aliquam impedit aspernatur unde a molestiae iusto dolores eligendi exercitationem ratione cupiditate necessitatibus culpa facilis repellendus doloremque ex!
-
-				$response = curl_exec($curl);
-
-				curl_close($curl);
-
-				$response = json_decode($response);
+                $response = MsApi::getTransactionDetails($username, $accessToken);
 
 				// echo $response;
 

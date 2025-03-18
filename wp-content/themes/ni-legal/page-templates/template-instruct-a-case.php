@@ -91,7 +91,7 @@ Template Name: Instruct A Case (v2)
 					USE TOKEN TO GET MATTERS - USING CURL DUE TO FILE GET CONTENTS ISSUES
 				\*----------------------------------------------------------------------------------*/
 
-                $response = MsApi::getTransactionDetails('iancreightoncr@gmail.com', $accessToken);
+                $response = MsApi::getTransactionDetails($email_value, $accessToken);
 				?>
 				
 				<div id="sortable-bs-2" class="sortable-container">

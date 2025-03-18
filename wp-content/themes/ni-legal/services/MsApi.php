@@ -15,6 +15,7 @@ class MsApi
         $curl = null;
 
         $host = static::getHost();
+        $response = null;
 
         try {
             $curl = curl_init();
@@ -39,11 +40,12 @@ class MsApi
 
             curl_close($curl);
 
-            return json_decode($response);
-        } catch (\Exception $e) {} finally {
+            $response = json_decode($response);
+        } catch (\Exception $e) {
+        } finally {
             curl_close($curl);
 
-            return null;
+            return $response;
         }
     }
 
