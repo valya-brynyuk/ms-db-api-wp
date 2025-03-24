@@ -31,3 +31,5 @@ wp-content/upgrade/
 *.vscode/
 .DS_Store
 Thumbs.db
+php_errorlog
+wp-admin/php_errorlog

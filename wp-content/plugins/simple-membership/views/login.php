@@ -29,7 +29,7 @@ if ( !empty( $render_new_form_ui ) ){
 $hide_join_us_link_enabled = SwpmSettings::get_instance()->get_value('hide-join-us-link');
 ?>
 <div class="swpm-login-widget-form">
-    <form id="swpm-login-form" name="swpm-login-form" method="post" action="">
+    <form id="swpm-login-form" data-tets name="swpm-login-form" method="post" action="">
         <input type="hidden" name="swpm_login_origination_flag" value="1" />
         <div class="swpm-login-form-inner">
             <div class="swpm-username-label">

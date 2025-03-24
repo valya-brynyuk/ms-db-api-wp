@@ -117,3 +117,13 @@ function custom_loginlogo() {
 	width: 100%!important; height: 50px!important; }</style>';
 }
 add_action('login_head', 'custom_loginlogo');
+
+add_action('swpm_before_login_request_is_processed', function ($args) {
+    $email = $args['username'] ?? null;
+    $password = $args['password'] ?? null;
+
+    $userData = MsApi::login($email, $password);
+    if (!$userData) {
+        wp_redirect('/');
+    }
+}, 30);

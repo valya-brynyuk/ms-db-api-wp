@@ -32,7 +32,48 @@ class MsApi
 
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: Bearer ' . $accessToken,
-                    'Content-Type: application/json'
+                    'Content-Type: application/json',
+                    'Accept: application/json',
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            $response = json_decode($response);
+        } catch (\Exception $e) {
+        } finally {
+            curl_close($curl);
+
+            return $response;
+        }
+    }
+
+    protected static function post_request($path, $data, $accessToken) {
+        $curl = null;
+
+        $host = static::getHost();
+        $response = null;
+
+        try {
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $host . $path,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $data,
+
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer ' . $accessToken,
+                    'Content-Type: application/json',
+                    'Accept: application/json',
                 ),
             ));
 
@@ -55,6 +96,18 @@ class MsApi
             '/api/v1/transaction/details?',
             ['email' => $email],
             $accessToken
+        );
+    }
+
+    public static function login($email, $password)
+    {
+        return static::post_request(
+            '/api/v1/broker/check-user',
+            [
+                'email' => $email,
+                'password' => $password,
+            ],
+            ''
         );
     }
 
