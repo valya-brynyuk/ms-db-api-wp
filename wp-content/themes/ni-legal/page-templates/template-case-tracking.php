@@ -88,7 +88,9 @@ Template Name: Case Tracking
 				\*----------------------------------------------------------------------------------*/
 
                 $currentUser = wp_get_current_user();
+                var_dump($currentUser);
                 $response = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
+                var_dump($response);
 
                 if (!empty($objGetMatters)) {
                     echo ($objGetMatters->access_token);
