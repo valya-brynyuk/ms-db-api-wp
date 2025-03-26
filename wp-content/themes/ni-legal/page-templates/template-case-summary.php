@@ -291,9 +291,9 @@ Template Name: Case Tracking Summary
                 <h3>Case Log</h3>
                 <!-- CASE LOG / HISTORY -->
 
-                <div class="case-log">
+                <div >
 
-                    <div id="data-container">
+                    <div >
                         <ul>
                         <?php
                         foreach ($historyResponse as $responseItem) {
@@ -308,7 +308,6 @@ Template Name: Case Tracking Summary
                         ?>
                         </ul>
                     </div>
-                    <div id="pagination"></div>
 
                 </div>
                 <?php
