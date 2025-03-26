@@ -2,7 +2,6 @@
 
 class MsApi
 {
-
     protected static function getHost() {
         if (!defined('NI_LEGAL_MS_API_HOST')) {
             throw new Exception('Missing NI_LEGAL_MS_API_HOST');
@@ -145,5 +144,12 @@ class MsApi
             [],
             $accessToken
         );
+    }
+
+    public static function getMatterId($email, $accessToken)
+    {
+        $data = static::getBrokerListing($email, $accessToken);
+
+        return $data[0]->matter_id ?? null;
     }
 }

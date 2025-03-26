@@ -94,45 +94,20 @@ Template Name: Case Tracking Summary
 			/*----------------------------------------------------------------------------------*\
 				USE TOKEN TO GET MILESTONES - USING CURL DUE TO FILE GET CONTENTS ISSUES
 			\*----------------------------------------------------------------------------------*/
-
-            $responseMilestones = MsApi::getMilestoneDates($caseNumber, $accessToken);
+            $currentUser = wp_get_current_user();
+            $matterId = MsApi::getMatterId($currentUser->user_email, $accessToken);
+            $responseMilestones = MsApi::getMilestoneDates($matterId, $accessToken);
 //            $responseMilestones = MsApi::getMilestoneDates('331491', $accessToken);
 			// print "<pre>";
 			// print_r($responseMilestones);
 			// print "</pre>";
 			// print("<pre>".print_r($response,true)."</pre>");
-			
-			?>
-
-			<?php
 
 			/*----------------------------------------------------------------------------------*\
 				USE TOKEN TO GET DETAILS (MATTER HEADER AND CASE LOG) - USING CURL DUE TO FILE GET CONTENTS ISSUES
 			\*----------------------------------------------------------------------------------*/
-
-			$curl = curl_init();
-
-			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'https://wn.azurewebsites.net/api/Matter/GetMatterDetails',
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING => '',
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST => 'POST',
-				CURLOPT_POSTFIELDS => $caseNumber,
-				CURLOPT_HTTPHEADER => array(
-					'Authorization: Bearer ' . $accessToken,
-					'Content-Type: application/json'
-				),
-			));
-
-			$response = curl_exec($curl);
-
-			curl_close($curl);
 			
-			$response = json_decode($response, true);
+			$response = MsApi::getMatterDetails($matterId, $accessToken);
 			// print("<pre>".print_r($response,true)."</pre>");
 			
 			?>

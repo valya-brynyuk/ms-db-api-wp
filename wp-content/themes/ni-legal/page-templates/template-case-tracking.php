@@ -87,38 +87,8 @@ Template Name: Case Tracking
 					USE TOKEN TO GET MATTERS - USING CURL DUE TO FILE GET CONTENTS ISSUES
 				\*----------------------------------------------------------------------------------*/
 
-//				$curl = curl_init();
-//
-//				curl_setopt_array($curl, array(
-//					//CURLOPT_URL => 'https://wnpreprod.focisportal.co.uk/API/api/Matter/GetBrokerListing',
-//					CURLOPT_URL => 'https://wn.azurewebsites.net/api/Matter/GetBrokerListing',
-//					CURLOPT_RETURNTRANSFER => true,
-//					CURLOPT_ENCODING => '',
-//					CURLOPT_MAXREDIRS => 10,
-//					CURLOPT_TIMEOUT => 0,
-//					CURLOPT_FOLLOWLOCATION => true,
-//					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//					CURLOPT_CUSTOMREQUEST => 'GET',
-//					// CURLOPT_POSTFIELDS => '"JosephBloggs@TestAccount.co.uk"',
-//					// CURLOPT_POSTFIELDS => '"phigginsontestbroker1@wilson-nesbitt.co.uk"',
-//
-//					CURLOPT_POSTFIELDS => '"'.$username.'"',
-//					// CURLOPT_POSTFIELDS => '"'.$email_value.'"',
-//
-//					CURLOPT_HTTPHEADER => array(
-//						'Authorization: Bearer ' . $accessToken,
-//						'Content-Type: application/json'
-//					),
-//				));
-//
-//
-//				$response = curl_exec($curl);
-//
-//				curl_close($curl);
-//
-//				$response = json_decode($response);
-
-                $response = MsApi::getBrokerListing($username, $accessToken);
+                $currentUser = wp_get_current_user();
+                $response = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
 
                 if (!empty($objGetMatters)) {
                     echo ($objGetMatters->access_token);

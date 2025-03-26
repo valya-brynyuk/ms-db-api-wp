@@ -90,8 +90,8 @@ Template Name: Instruct A Case (v2)
 				/*----------------------------------------------------------------------------------*\
 					USE TOKEN TO GET MATTERS - USING CURL DUE TO FILE GET CONTENTS ISSUES
 				\*----------------------------------------------------------------------------------*/
-
-                $response = MsApi::getTransactionDetails($email_value, $accessToken);
+                $currentUser = wp_get_current_user();
+                $response = MsApi::getTransactionDetails($currentUser->user_email, $accessToken);
 				?>
 				
 				<div id="sortable-bs-2" class="sortable-container">
