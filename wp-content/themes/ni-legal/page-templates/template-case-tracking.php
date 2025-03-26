@@ -88,9 +88,7 @@ Template Name: Case Tracking
 				\*----------------------------------------------------------------------------------*/
 
                 $currentUser = wp_get_current_user();
-                var_dump($currentUser);
                 $response = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
-                var_dump($response);
 
                 if (!empty($objGetMatters)) {
                     echo ($objGetMatters->access_token);
@@ -129,18 +127,17 @@ Template Name: Case Tracking
 						<tbody class="list">
 
 						
-						<?php if ($response->Message !== 'Authorization has been denied for this request.'): ?>
+						<?php if (!isset($response->Message) || $response->Message !== 'Authorization has been denied for this request.'): ?>
 							
-							<?php $tempCounter; ?>
+							<?php $tempCounter = 0; ?>
 
 							<?php foreach ( $response as $key => $responseItem) : ?>
 
 								<?php $tempCounter++; ?>
-								<?php 		
-			?>
 
-							<tr>
+							<tr id="foo">
 								<td class="client">
+
 									<?php echo $response[$key]->Client; ?>
 								</td>
 								<td class="case-details">

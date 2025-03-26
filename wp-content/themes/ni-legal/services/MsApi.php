@@ -150,6 +150,6 @@ class MsApi
     {
         $data = static::getBrokerListing($email, $accessToken);
 
-        return $data[0]->matter_id ?? null;
+        return $data[0]->MatterNumber ?? null;
     }
 }

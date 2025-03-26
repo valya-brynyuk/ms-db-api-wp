@@ -88,14 +88,14 @@ Template Name: Case Tracking Summary
 
 
 			}
-			?>
 
-			<?php 
 			/*----------------------------------------------------------------------------------*\
 				USE TOKEN TO GET MILESTONES - USING CURL DUE TO FILE GET CONTENTS ISSUES
 			\*----------------------------------------------------------------------------------*/
             $currentUser = wp_get_current_user();
-            $matterId = MsApi::getMatterId($currentUser->user_email, $accessToken);
+            $brokerListing = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
+            $matter = $brokerListing[0] ?? [];
+            $matterId = $matter->MatterNumber ?? null;
             $responseMilestones = MsApi::getMilestoneDates($matterId, $accessToken);
 //            $responseMilestones = MsApi::getMilestoneDates('331491', $accessToken);
 			// print "<pre>";
@@ -109,11 +109,12 @@ Template Name: Case Tracking Summary
 			
 			$response = MsApi::getMatterDetails($matterId, $accessToken);
 			// print("<pre>".print_r($response,true)."</pre>");
-			
-			?>
+            $respArr = (array)($response[0] ?? new stdClass());
+            $responseHeader = array_merge($respArr, (array)$matter);
+            $historyResponse = MsApi::getMatterHistory($matterId, $accessToken);
 
-			<?php $responseHeader = ($response['MatterHeader']); ?>
 
+            ?>
 
 			<div class="cols--wg">
 
@@ -127,7 +128,6 @@ Template Name: Case Tracking Summary
 							<h3>Case</h3>
 							<p class="case-title">
 								<strong><?php echo $responseHeader['MatterDescription']; ?><br></strong>
-								<?php echo $responseHeader['Context']; ?>
 							</p>
 						</div>
 						
@@ -163,14 +163,14 @@ Template Name: Case Tracking Summary
 											Case Handler
 										</p>
 										<p class="case-handler-details__name">
-											<?php echo $responseHeader['FeeEarnerName']; ?>
+											<?php echo $responseHeader['FeeEarnerName'] ?? ''; ?>
 										</p>
 										<p class="case-handler-details__phone">
-											<a href="tel:<?php echo $responseHeader['FeeEarnerDirectDial']; ?>"><?php echo $responseHeader['FeeEarnerDirectDial']; ?></a>
+											<a href="tel:<?php echo $responseHeader['FeeEarnerDirectDial'] ?? ''; ?>"><?php echo $responseHeader['FeeEarnerDirectDial'] ?? ''; ?></a>
 										</p>
 										<p class="case-handler-details__email">
-											<a href="mailto:<?php echo $responseHeader['FeeEarnerEmail']; ?>?subject=<?php echo $responseHeader['MatterDescription']; ?> - <?php echo $responseHeader['FeeEarnerName']; ?>">
-												<?php echo $responseHeader['FeeEarnerEmail']; ?>
+											<a href="mailto:<?php echo $responseHeader['FeeEarnerEmail'] ?? ''; ?>?subject=<?php echo $responseHeader['MatterDesc']; ?> - <?php echo $responseHeader['FeeEarnerName'] ?? ''; ?>">
+												<?php echo $responseHeader['FeeEarnerEmail'] ?? ''; ?>
 											</a>
 										</p>
 
@@ -179,7 +179,7 @@ Template Name: Case Tracking Summary
 									<div class="col--1of3--s">
 
 										<?php
-										$imagePath = $responseHeader['FeeEarnerImagePath']; 
+										$imagePath = $responseHeader['FeeEarnerImagePath'] ?? '';
 										$imagePath = str_replace('~','',$imagePath); ?>
 										<div class="case-handler-details__portrait-containter">
 											<?php if ( $imagePath): ?>
@@ -232,8 +232,8 @@ Template Name: Case Tracking Summary
 							<?php foreach ($responseMilestones as $key => $responseItem) : ?>
 							
 								<?php
-									$mileStoneClass;
-									$milestoneStatus = $responseMilestones[$key]->milestonestatus;
+									$mileStoneClass = '';
+									$milestoneStatus = !empty($responseMilestones[$key]->CompletedDate) ? 'completed' : 'required';
 									$mileStoneCompletedDated = $responseMilestones[$key]->CompletedDate;
 									$mileStoneCompletedDated = preg_replace('/\s+/', '', $mileStoneCompletedDated);
 
@@ -251,7 +251,7 @@ Template Name: Case Tracking Summary
 								?>
 								<li class="<?php echo $mileStoneClass; ?>">
 									<span class="tool-tip-source">
-										<?php echo $responseMilestones[$key]->MilestoneDescription; ?>
+										<?php echo $responseMilestones[$key]->Milestone; ?>
 
 										 <?php if(++$milestoneCount === $numMilestones) { 
 											
@@ -285,25 +285,40 @@ Template Name: Case Tracking Summary
 			</div>
 
 
-			
-				<h3>Case Log</h3>
-				<!-- CASE LOG / HISTORY -->
+            <?php
+            if (!empty($historyResponse)) {
+                ?>
+                <h3>Case Log</h3>
+                <!-- CASE LOG / HISTORY -->
 
-				<?php $responseHistory = ($response['History']); ?>
+                <div class="case-log">
 
+                    <div id="data-container">
+                        <ul>
+                        <?php
+                        foreach ($historyResponse as $responseItem) {
+                            $formattedDate =  date_create($responseItem->HistoryDate);
+                            ?>
+                            <li>
+                                <?php echo date_format($formattedDate, "d-m-Y") ?> -
+                                <?php echo $responseItem->HistoryDesc ?? '-'; ?>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        </ul>
+                    </div>
+                    <div id="pagination"></div>
 
-				
-				<div class="case-log">
+                </div>
+                <?php
+            } else {
+                ?>
+                <h3>No Case Log</h3>
+                <?php
+            }
 
-					<div id="data-container">
-
-		
-
-				
-					</div>
-					<div id="pagination"></div>
-
-				</div>					
+            ?>
 
 		<?php else: //login check ?> 
 			<p>Not logged in </p>
