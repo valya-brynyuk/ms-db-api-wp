@@ -291,23 +291,12 @@ Template Name: Case Tracking Summary
                 <h3>Case Log</h3>
                 <!-- CASE LOG / HISTORY -->
 
-                <div >
+                <div class="case-log">
 
-                    <div >
-                        <ul>
-                        <?php
-                        foreach ($historyResponse as $responseItem) {
-                            $formattedDate =  date_create($responseItem->HistoryDate);
-                            ?>
-                            <li>
-                                <?php echo date_format($formattedDate, "d-m-Y") ?> -
-                                <?php echo $responseItem->HistoryDesc ?? '-'; ?>
-                            </li>
-                            <?php
-                        }
-                        ?>
-                        </ul>
+                    <div id="data-container">
+
                     </div>
+                    <div id="pagination"></div>
 
                 </div>
                 <?php
@@ -339,11 +328,11 @@ Template Name: Case Tracking Summary
         let container = jQuery('#pagination');
         container.pagination({
             dataSource: [
-				<?php foreach ($responseHistory as $key => $responseItem) : ?>
+				<?php foreach ($historyResponse as $key => $responseItem) : ?>
 
-					<?php $formattedDate =  date_create($responseHistory[$key]['HistoryDate']); ?>
+					<?php $formattedDate =  date_create($historyResponse[$key]->HistoryDate); ?>
 
-					<?php echo "{name: \"<span class='case-log__date'>".date_format($formattedDate, "d-m-Y")."</span><span class='case-log__description'>".$responseHistory[$key]["HistoryDescription"]."</span><br>\"}," ?>
+					<?php echo "{name: \"<span class='case-log__date'>".date_format($formattedDate, "d-m-Y")."</span><span class='case-log__description'>".$historyResponse[$key]->HistoryDesc."</span><br>\"}," ?>
 
 
 			<?php endforeach; ?>
