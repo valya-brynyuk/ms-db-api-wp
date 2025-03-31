@@ -113,7 +113,7 @@ Template Name: Case Tracking Summary
             $responseHeader = array_merge($respArr, (array)$matter);
             $historyResponse = MsApi::getMatterHistory($matterId, $accessToken);
 
-
+            $matterDetail = MsApi::getMatterDetail($matterId, $accessToken);
             ?>
 
 			<div class="cols--wg">
@@ -163,14 +163,14 @@ Template Name: Case Tracking Summary
 											Case Handler
 										</p>
 										<p class="case-handler-details__name">
-											<?php echo $responseHeader['FeeEarnerName'] ?? ''; ?>
+											<?php echo $matterDetail[0]->CaseHandlerName ?? ''; ?>
 										</p>
 										<p class="case-handler-details__phone">
-											<a href="tel:<?php echo $responseHeader['FeeEarnerDirectDial'] ?? ''; ?>"><?php echo $responseHeader['FeeEarnerDirectDial'] ?? ''; ?></a>
+											<a href="tel:<?php echo $matterDetail[0]->CaseHandlerTel ?? ''; ?>"><?php echo $matterDetail[0]->CaseHandlerTel ?? ''; ?></a>
 										</p>
 										<p class="case-handler-details__email">
-											<a href="mailto:<?php echo $responseHeader['FeeEarnerEmail'] ?? ''; ?>?subject=<?php echo $responseHeader['MatterDesc']; ?> - <?php echo $responseHeader['FeeEarnerName'] ?? ''; ?>">
-												<?php echo $responseHeader['FeeEarnerEmail'] ?? ''; ?>
+											<a href="mailto:<?php echo $matterDetail[0]->CaseHandlerEmail ?? ''; ?>?subject=<?php echo $matterDetail[0]->MatterDesc ?? ''; ?> - <?php echo $matterDetail[0]->CaseHandlerEmail ?? ''; ?>">
+												<?php echo $matterDetail[0]->CaseHandlerEmail ?? ''; ?>
 											</a>
 										</p>
 
@@ -179,11 +179,11 @@ Template Name: Case Tracking Summary
 									<div class="col--1of3--s">
 
 										<?php
-										$imagePath = $responseHeader['FeeEarnerImagePath'] ?? '';
+										$imagePath = $matterDetail[0]->CaseHandlerPhotograph ?? '';
 										$imagePath = str_replace('~','',$imagePath); ?>
 										<div class="case-handler-details__portrait-containter">
 											<?php if ( $imagePath): ?>
-												<div class="case-handler-details__portrait" style="background-image: url('https://wn.azurewebsites.net/api/<?php echo $imagePath; ?>');"></div>
+												<div class="case-handler-details__portrait" style="background-image: url('data:image/jpg;base64,<?php echo $imagePath; ?>');"></div>
 												<!-- <img class="case-handler-details__portrait" src="https://wn.focisportal.co.uk/API/<?php // echo $imagePath; ?>" alt=""> -->
 											<?php else: ?>
 												<div class="case-handler-details__portrait" style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/images/default-casehandler.jpg');"></div>

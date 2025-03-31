@@ -128,6 +128,15 @@ class MsApi
         );
     }
 
+    public static function getMatterDetail($matterId, $accessToken)
+    {
+        return static::request(
+            '/api/v1/matter/' . $matterId . '/single',
+            [],
+            $accessToken
+        );
+    }
+
     public static function getMatterHistory($matterId, $accessToken)
     {
         return static::request(
