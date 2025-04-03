@@ -2,9 +2,24 @@
 /*
 Template Name: Case Tracking Summary
 */
-?>
 
-<?php get_header(); ?>
+$accessToken = $_SESSION['accessToken'] ?? '';
+$caseNumber = $_GET['casenumber'] ?? '';
+$matterCancelled = $_GET['mc'] ?? '';
+
+$currentUser = wp_get_current_user();
+$brokerListing = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
+$matter = $brokerListing[0] ?? new stdClass();
+$matterId = $caseNumber ?? $matter->MatterNumber ?? null;
+
+$responseMilestones = MsApi::getMilestoneDates($matterId, $accessToken);
+$matterDetail = MsApi::getMatterDetail($matterId, $accessToken);
+$respArr = (array)($matterDetail[0] ?? new stdClass());
+$responseHeader = $respArr;
+$historyResponse = MsApi::getMatterHistory($matterId, $accessToken);
+
+get_header();
+?>
 
 <div class="content">
 
@@ -22,100 +37,6 @@ Template Name: Case Tracking Summary
 				<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
 			<?php endif; ?>
 
-
-
-			<?php 
-				$accessToken = $_SESSION['accessToken'];
-				$caseNumber = $_GET['casenumber'];
-				$matterCancelled = $_GET['mc'];
-			?>
-
-			<?php if ($accessToken){
-
-			$member_id = SwpmMemberUtils::get_logged_in_members_id();
-			$field_name = 'email';
-			$email_value = SwpmMemberUtils::get_member_field_by_id($member_id, $field_name);
-			// $field_name = 'address_zipcode';
-			$field_name = 'subscr_id';
-			$password_value = SwpmMemberUtils::get_member_field_by_id($member_id, $field_name); 
-
-
-			/*----------------------------------------------------------------------------------*\
-			ONE PERSONS MANY CASES
-			\*----------------------------------------------------------------------------------*/
-
-			/*----------------------------------------------------------------------------------*\
-			API
-			\*----------------------------------------------------------------------------------*/
-
-			$apiBaseAddress = 'https://wn.azurewebsites.net/';
-			// $username = 'JosephBloggs@TestAccount.co.uk';
-			// $password = 'TestAccount01!';
-			$username = $email_value;
-			$password = $password_value;
-
-			/*----------------------------------------------------------------------------------*\
-			GET TOKEN - FILE GET CONTENTS
-			\*----------------------------------------------------------------------------------*/
-
-			$urlGetToken = $apiBaseAddress . 'api/User/GetToken';
-
-			$dataGetToken = array('username' => $username, "password" => $password, 'deviceToken' => 'string');
-
-			$optionsGetToken = array(
-			'http' => array(
-				'header' => "Content-type: application/x-www-form-urlencoded",
-				'method' => 'POST',
-				'content' => http_build_query($dataGetToken)
-			)
-			// "ssl" => array(
-			// 	"verify_peer"=>false,
-			// 	"verify_peer_name"=>false,
-			// )
-			);
-
-			$contextGetToken = stream_context_create($optionsGetToken);
-			$respGetToken = file_get_contents($urlGetToken, false, $contextGetToken);
-
-			$objGetToken = json_decode($respGetToken);
-
-			$accessToken = $objGetToken->access_token;
-			$accessToken = trim($accessToken);
-
-			//Save to Session variables
-			$_SESSION['accessToken'] = $accessToken;
-
-
-
-			}
-
-			/*----------------------------------------------------------------------------------*\
-				USE TOKEN TO GET MILESTONES - USING CURL DUE TO FILE GET CONTENTS ISSUES
-			\*----------------------------------------------------------------------------------*/
-            $currentUser = wp_get_current_user();
-            $brokerListing = MsApi::getBrokerListing($currentUser->user_email, $accessToken);
-            $matter = $brokerListing[0] ?? [];
-            $matterId = $matter->MatterNumber ?? null;
-            $responseMilestones = MsApi::getMilestoneDates($matterId, $accessToken);
-//            $responseMilestones = MsApi::getMilestoneDates('331491', $accessToken);
-			// print "<pre>";
-			// print_r($responseMilestones);
-			// print "</pre>";
-			// print("<pre>".print_r($response,true)."</pre>");
-
-			/*----------------------------------------------------------------------------------*\
-				USE TOKEN TO GET DETAILS (MATTER HEADER AND CASE LOG) - USING CURL DUE TO FILE GET CONTENTS ISSUES
-			\*----------------------------------------------------------------------------------*/
-			
-			$response = MsApi::getMatterDetails($matterId, $accessToken);
-			// print("<pre>".print_r($response,true)."</pre>");
-            $respArr = (array)($response[0] ?? new stdClass());
-            $responseHeader = array_merge($respArr, (array)$matter);
-            $historyResponse = MsApi::getMatterHistory($matterId, $accessToken);
-
-            $matterDetail = MsApi::getMatterDetail($matterId, $accessToken);
-            ?>
-
 			<div class="cols--wg">
 
 				<div class="col--1of2--wg">
@@ -127,7 +48,7 @@ Template Name: Case Tracking Summary
 						<div class="case-module">
 							<h3>Case</h3>
 							<p class="case-title">
-								<strong><?php echo $responseHeader['MatterDescription']; ?><br></strong>
+								<strong><?php echo $responseHeader['MatterDesc']; ?><br></strong>
 							</p>
 						</div>
 						
@@ -328,11 +249,12 @@ Template Name: Case Tracking Summary
         let container = jQuery('#pagination');
         container.pagination({
             dataSource: [
-				<?php foreach ($historyResponse as $key => $responseItem) : ?>
+				<?php
+                foreach ($historyResponse as $key => $responseItem) : ?>
 
-					<?php $formattedDate =  date_create($historyResponse[$key]->HistoryDate); ?>
+					<?php $formattedDate =  date_create($responseItem->HistoryDate); ?>
 
-					<?php echo "{name: \"<span class='case-log__date'>".date_format($formattedDate, "d-m-Y")."</span><span class='case-log__description'>".$historyResponse[$key]->HistoryDesc."</span><br>\"}," ?>
+					<?php echo "{name: \"<span class='case-log__date'>".date_format($formattedDate, "d-m-Y")."</span><span class='case-log__description'>".htmlspecialchars($responseItem->HistoryDesc)."</span><br>\"}," ?>
 
 
 			<?php endforeach; ?>

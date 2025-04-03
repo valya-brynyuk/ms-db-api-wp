@@ -127,3 +127,14 @@ add_action('swpm_before_login_request_is_processed', function ($args) {
         wp_redirect('/');
     }
 }, 30);
+
+// only for dev test
+//add_action('init', function () {
+//    $user_id = '100';
+//    $user = get_user($user_id);
+//    $user_login = $user->user_login;
+//
+//    wp_set_current_user($user_id, $user_login);
+//    wp_set_auth_cookie($user_id);
+//    do_action('wp_login', $user_login, $user);
+//});
