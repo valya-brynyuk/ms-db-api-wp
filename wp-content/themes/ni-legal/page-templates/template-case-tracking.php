@@ -120,6 +120,8 @@ Template Name: Case Tracking
 								<th><strong><button class="sort" data-sort="progress">Progress</button></strong></th>
 								<th class="hidden-field"><strong>Progress Hidden</strong></th>
 								<th class="hidden-field"><strong>Cancelled Hidden</strong></th>
+								<th class="hidden-field"><strong>MatterCompleted></strong></th>
+								<th class="hidden-field"><strong>MatterCancelled></strong></th>
 								<th><strong>Case Handler</strong></th>
 								<th></th>
 							</tr>
@@ -179,14 +181,22 @@ Template Name: Case Tracking
 								<td class="cancelledhidden hidden-field">
 									<?php echo $response[$key]->MatterCancelled; ?>
 								</td>
+                                <td class="MatterCancelled hidden-field">
+                                    <?php echo $response[$key]->MatterCancelled; ?>
+                                </td>
+                                <td class="MatterCompleted hidden-field">
+                                    <?php echo $response[$key]->MatterCompleted; ?>
+                                </td>
 								<td class="client">
 									<?php echo $response[$key]->CaseHandler; ?>
 								</td>
+
 								<td>
 									<span class="no-wr">
 										<a href="<?php echo site_url('case-tracking/case?casenumber='); ?><?php echo $response[$key]->MatterNumber; ?><?php if ($response[$key]->MatterCancelled): ?>&mc=1<?php endif; ?>&client=<?php echo $response[$key]->Client; ?>">View Case</a>
 									</span>
 								</td>
+
 							</tr>
 							<?php endforeach; ?>
 							<?php else: ?>
