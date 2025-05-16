@@ -36,50 +36,10 @@ Template Name: Quote Calculator
 					$field_name = 'last_name'; 
 					$lastname_value = SwpmMemberUtils::get_member_field_by_id($member_id, $field_name);  
 					$field_name = 'company_name'; 
-					$company_value = SwpmMemberUtils::get_member_field_by_id($member_id, $field_name);  
-			
-					
-                    /*----------------------------------------------------------------------------------*\
-					API
-                    \*----------------------------------------------------------------------------------*/
+					$company_value = SwpmMemberUtils::get_member_field_by_id($member_id, $field_name);
 
-                    $apiBaseAddress = 'https://wn.azurewebsites.net/';
-                    // $username = 'JosephBloggs@TestAccount.co.uk';
-                    // $password = 'TestAccount01!';
-                    $username = $email_value;
-                    $password = $password_value;
-
-                    /*----------------------------------------------------------------------------------*\
-                        GET TOKEN - FILE GET CONTENTS
-                    \*----------------------------------------------------------------------------------*/
-
-                    $urlGetToken = $apiBaseAddress . 'api/User/GetToken';
-
-                    $dataGetToken = array('username' => $username, "password" => $password, 'deviceToken' => 'string');
-
-                    $optionsGetToken = array(
-                        'http' => array(
-                            'header' => "Content-type: application/x-www-form-urlencoded",
-                            'method' => 'POST',
-                            'content' => http_build_query($dataGetToken)
-                        )
-                        // "ssl" => array(
-                        // 	"verify_peer"=>false,
-                        // 	"verify_peer_name"=>false,
-                        // )
-                    );
-
-                    $contextGetToken = stream_context_create($optionsGetToken);
-                    $respGetToken = file_get_contents($urlGetToken, false, $contextGetToken);
-
-                    $objGetToken = json_decode($respGetToken);
-
-                    $userID = $objGetToken->User->UserId;
-                    $userEmail = $objGetToken->User->UserEmail;
-
-                    $userID = trim($userID);
-                    $userEmail = trim($userEmail);
-
+                    $currentUser = wp_get_current_user();
+                    $userID = $member_id;
 ?>
 
 
@@ -110,10 +70,15 @@ Template Name: Quote Calculator
 </div><!--content-->
 
 <!-- PREFILL COGNITO FORM IN WORDPRESS EDITOR -->
-	
-	<script>
-		Cognito.prefill({"Source":"Broker","BrokerID": "<?php echo $userID; ?>", "BrokerEmail":"<?php echo $userEmail; ?>", "BrokerCompany":"<?php echo $company_value; ?>", "BrokerFirstName":"<?php echo $firstname_value; ?>","BrokerLastName":"<?php echo $lastname_value; ?>"});
-	</script>
+
+    <script>
+        Cognito.prefill({"Name":{"First":`<?php echo $firstname_value; ?>`,"Last":`<?php echo $lastname_value; ?>`},"Email": `<?php echo $email_value; ?>`}).on('ready', function () {
+            const emailField = document.querySelector('#cog-3');
+            emailField.value = `<?php echo $email_value; ?>`;
+            emailField.dispatchEvent(new Event('change'));
+        });
+
+    </script>
 
 <!-- END PREFILL COGNITO FORM IN WORDPRESS EDITOR -->
 
