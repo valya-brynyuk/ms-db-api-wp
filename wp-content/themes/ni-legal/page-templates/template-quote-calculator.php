@@ -72,11 +72,11 @@ Template Name: Quote Calculator
 <!-- PREFILL COGNITO FORM IN WORDPRESS EDITOR -->
 
     <script>
-        Cognito.prefill({"Name":{"First":`<?php echo $firstname_value; ?>`,"Last":`<?php echo $lastname_value; ?>`},"Email": `<?php echo $email_value; ?>`}).on('ready', function () {
-            const emailField = document.querySelector('#cog-3');
-            emailField.value = `<?php echo $email_value; ?>`;
-            emailField.dispatchEvent(new Event('change'));
-        });
+        //Cognito.prefill({"Name":{"First":`<?php //echo $firstname_value; ?>//`,"Last":`<?php //echo $lastname_value; ?>//`},"Email": `<?php //echo $email_value; ?>//`}).on('ready', function () {
+        //    const emailField = document.querySelector('#cog-3');
+        //    emailField.value = `<?php //echo $email_value; ?>//`;
+        //    emailField.dispatchEvent(new Event('change'));
+        //});
 
     </script>
 
